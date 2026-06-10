@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       - name: Sync version from tag
@@ -28,4 +28,4 @@ jobs:
       - run: npm ci
 
       - name: Publish to npm
-        run: npm publish
+        run: npx npm@latest publish
