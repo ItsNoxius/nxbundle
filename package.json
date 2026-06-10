@@ -2,9 +2,13 @@
   "name": "nxbundle",
   "version": "0.1.0",
   "description": "Bundle FiveM resources for Cfx.re Asset Escrow from nxmanifest.jsonc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItsNoxius/nxbundle.git"
+  },
   "type": "module",
   "bin": {
-    "nxbundle": "./dist/cli.js"
+    "nxbundle": "dist/cli.js"
   },
   "files": [
     "dist",
