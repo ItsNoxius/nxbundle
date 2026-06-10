@@ -1,6 +1,6 @@
 {
   "name": "nxbundle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bundle FiveM resources for Cfx.re Asset Escrow from nxmanifest.jsonc",
   "repository": {
     "type": "git",
