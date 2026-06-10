@@ -1,0 +1,41 @@
+{
+  "name": "nxbundle",
+  "version": "0.1.0",
+  "description": "Bundle FiveM resources for Cfx.re Asset Escrow from nxmanifest.jsonc",
+  "type": "module",
+  "bin": {
+    "nxbundle": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup && npm run generate-schema",
+    "generate-schema": "tsx scripts/generate-schema.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "fivem",
+    "cfx",
+    "escrow",
+    "bundle",
+    "resource"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.12.3",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "jsonc-parser": "^3.3.1",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
+  }
+}
