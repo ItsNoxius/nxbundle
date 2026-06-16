@@ -32,6 +32,7 @@ This creates `nxmanifest.jsonc`, optionally runs your NUI build, validates requi
 | `npx nxbundle` | Run the bundle pipeline from `nxmanifest.jsonc` |
 | `npx nxbundle init` | Scaffold a base `nxmanifest.jsonc` |
 | `npx nxbundle --skip-build` | Skip the `build` step |
+| `npx nxbundle --skip-scripts` | Skip the `scripts` step |
 | `npx nxbundle --cwd <dir>` | Use a different resource root |
 | `npx nxbundle --config <path>` | Use a custom manifest path |
 | `npx nxbundle init --force` | Overwrite an existing manifest |
@@ -67,6 +68,9 @@ Example `nxmanifest.jsonc`:
       "to": "web/dist/screenshots/README.md"
     }
   ],
+  "scripts": [
+    { "command": "node scripts/prepare-escrow.mjs" }
+  ],
   "archive": {
     "format": "zip",
     "roots": "auto"
@@ -79,7 +83,8 @@ Example `nxmanifest.jsonc`:
 - **`include`** — paths copied into the archive (required)
 - **`build`** — optional `{ cwd, command }` or `false` to disable
 - **`require`** — paths that must exist before staging (fatal if missing)
-- **`prepare`** — pre-stage actions: `ensureDir`, `copyIfMissing`
+- **`prepare`** — pre-stage file actions: `ensureDir`, `copyIfMissing`
+- **`scripts`** — optional pre-stage commands run after `prepare` (e.g. patch `fxmanifest.lua`); each entry accepts `command` and optional `cwd` (defaults to resource root)
 - **`archive.roots`** — `"auto"` uses top-level segments from `include`, or pass an explicit list
 
 ## Requirements

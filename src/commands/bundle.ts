@@ -7,6 +7,7 @@ import { createArchive } from '../pipeline/archive.js'
 import { runBuild } from '../pipeline/build.js'
 import { runPrepare } from '../pipeline/prepare.js'
 import { runRequire } from '../pipeline/require.js'
+import { runScripts } from '../pipeline/scripts.js'
 import { copyIntoStaging } from '../pipeline/stage.js'
 import { fail } from '../utils/fail.js'
 import { requireManifest, resolveManifestPath, resolveResourceRoot } from '../utils/paths.js'
@@ -15,6 +16,7 @@ export interface BundleOptions {
     cwd?: string
     config?: string
     skipBuild?: boolean
+    skipScripts?: boolean
 }
 
 export async function runBundle(options: BundleOptions): Promise<void> {
@@ -28,6 +30,7 @@ export async function runBundle(options: BundleOptions): Promise<void> {
     await runBuild(manifest, resourceRoot, options.skipBuild ?? false)
     runRequire(manifest, resourceRoot)
     runPrepare(manifest, resourceRoot)
+    await runScripts(manifest, resourceRoot, options.skipScripts ?? false)
 
     const staging = join(tmpdir(), `nxbundle-${manifest.name}-${randomUUID()}`)
     mkdirSync(staging, { recursive: true })

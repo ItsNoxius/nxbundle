@@ -1,8 +1,15 @@
 import { z } from 'zod'
 
+const commandSchema = z.union([z.string().min(1), z.array(z.string().min(1)).min(1)])
+
 const buildSchema = z.object({
     cwd: z.string().min(1),
-    command: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)]),
+    command: commandSchema,
+})
+
+const scriptSchema = z.object({
+    cwd: z.string().min(1).optional(),
+    command: commandSchema,
 })
 
 const ensureDirAction = z.object({
@@ -31,6 +38,7 @@ export const manifestSchema = z.object({
     build: z.union([buildSchema, z.literal(false)]).optional(),
     require: z.array(z.string().min(1)).optional(),
     prepare: z.array(prepareAction).optional(),
+    scripts: z.array(scriptSchema).optional(),
     archive: archiveSchema.optional(),
 })
 

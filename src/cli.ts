@@ -19,12 +19,14 @@ program
     .option('--cwd <dir>', 'resource root directory', process.cwd())
     .option('--config <path>', 'path to nxmanifest.jsonc')
     .option('--skip-build', 'skip the build step')
-    .action(async (options: { cwd: string; config?: string; skipBuild?: boolean }) => {
+    .option('--skip-scripts', 'skip the scripts step')
+    .action(async (options: { cwd: string; config?: string; skipBuild?: boolean; skipScripts?: boolean }) => {
         try {
             await runBundle({
                 cwd: options.cwd,
                 config: options.config,
                 skipBuild: options.skipBuild,
+                skipScripts: options.skipScripts,
             })
         } catch (error) {
             handleBundleError(error)
